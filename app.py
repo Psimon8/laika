@@ -78,7 +78,7 @@ with st.sidebar:
         st.session_state.selected_page = "Accueil"
         st.rerun()
     
-    if st.button("� Structured Data Analyser", key="structured_data", use_container_width=True):
+    if st.button("🔍 Structured Data Analyser", key="structured_data", use_container_width=True):
         st.session_state.selected_page = "Structured Data Analyser"
         st.rerun()
     
@@ -164,40 +164,57 @@ if selected == "Accueil":
 elif selected == "Structured Data Analyser":
     # Importer et exécuter l'app JSON Optimiser
     import sys
-    sys.path.insert(0, '/workspaces/laika/Jsonoptimiser')
-    
-    # Charger le module
     import importlib.util
-    spec = importlib.util.spec_from_file_location("json_app", "/workspaces/laika/Jsonoptimiser/json.py")
-    json_app = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(json_app)
+    
+    try:
+        sys.path.insert(0, '/workspaces/laika/Jsonoptimiser')
+        
+        # Charger le module sans l'exécuter
+        spec = importlib.util.spec_from_file_location("json_app", "/workspaces/laika/Jsonoptimiser/json.py")
+        json_app = importlib.util.module_from_spec(spec)
+        
+        # L'exécution du module charge l'interface Streamlit
+        spec.loader.exec_module(json_app)
+    except Exception as e:
+        st.error(f"❌ Erreur lors du chargement de Structured Data Analyser: {e}")
+        st.info("Assurez-vous que toutes les dépendances sont installées.")
 
 elif selected == "Maillage Interne":
     # Importer et exécuter l'app Maillage Interne
     import sys
-    sys.path.insert(0, '/workspaces/laika/blablamaillage-interneblabla')
-    
-    # Charger le module
     import importlib.util
-    spec = importlib.util.spec_from_file_location("maillage_app", "/workspaces/laika/blablamaillage-interneblabla/app.py")
-    maillage_app = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(maillage_app)
     
-    # Exécuter la fonction main si elle existe
-    if hasattr(maillage_app, 'main'):
-        maillage_app.main()
+    try:
+        sys.path.insert(0, '/workspaces/laika/blablamaillage-interneblabla')
+        
+        # Charger le module
+        spec = importlib.util.spec_from_file_location("maillage_app", "/workspaces/laika/blablamaillage-interneblabla/app.py")
+        maillage_app = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(maillage_app)
+        
+        # Exécuter la fonction main si elle existe
+        if hasattr(maillage_app, 'main'):
+            maillage_app.main()
+    except Exception as e:
+        st.error(f"❌ Erreur lors du chargement de Maillage Interne: {e}")
+        st.info("Assurez-vous que toutes les dépendances sont installées.")
 
 elif selected == "Conversational Queries":
     # Importer et exécuter l'app Conversational Queries
     import sys
-    sys.path.insert(0, '/workspaces/laika/conversational-queries')
-    
-    # Charger le module
     import importlib.util
-    spec = importlib.util.spec_from_file_location("conv_app", "/workspaces/laika/conversational-queries/app.py")
-    conv_app = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(conv_app)
     
-    # Exécuter la fonction main
-    if hasattr(conv_app, 'main'):
-        conv_app.main()
+    try:
+        sys.path.insert(0, '/workspaces/laika/conversational-queries')
+        
+        # Charger le module
+        spec = importlib.util.spec_from_file_location("conv_app", "/workspaces/laika/conversational-queries/app.py")
+        conv_app = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(conv_app)
+        
+        # Exécuter la fonction main
+        if hasattr(conv_app, 'main'):
+            conv_app.main()
+    except Exception as e:
+        st.error(f"❌ Erreur lors du chargement de Conversational Queries: {e}")
+        st.info("Assurez-vous que toutes les dépendances sont installées.")
