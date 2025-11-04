@@ -1,0 +1,9 @@
+streamlit
+pandas
+beautifulsoup4
+openpyxl
+# Pour l'analyse floue (fortement recommandé)
+fuzzywuzzy
+python-levenshtein
+# Pour l'analyse ultra-rapide des mots-clés (fortement recommandé)
+pyahocorasick

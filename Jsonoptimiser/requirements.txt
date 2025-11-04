@@ -1,0 +1,6 @@
+streamlit
+beautifulsoup4
+extruct
+w3lib
+lxml
+pandas
