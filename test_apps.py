@@ -89,11 +89,15 @@ def main():
     # Vérifier les dépendances
     deps_ok = check_dependencies()
     
+    # Obtenir le répertoire courant
+    import os
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    
     # Tester chaque application
     apps = [
-        ("Structured Data Analyser", "/workspaces/laika/Jsonoptimiser/json.py"),
-        ("Maillage Interne", "/workspaces/laika/blablamaillage-interneblabla/app.py"),
-        ("Conversational Queries", "/workspaces/laika/conversational-queries/app.py"),
+        ("Structured Data Analyser", os.path.join(current_dir, "Jsonoptimiser", "json.py")),
+        ("Maillage Interne", os.path.join(current_dir, "blablamaillage-interneblabla", "app.py")),
+        ("Conversational Queries", os.path.join(current_dir, "conversational-queries", "app.py")),
     ]
     
     results = []

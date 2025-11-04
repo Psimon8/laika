@@ -165,56 +165,88 @@ elif selected == "Structured Data Analyser":
     # Importer et exécuter l'app JSON Optimiser
     import sys
     import importlib.util
+    import os
     
     try:
-        sys.path.insert(0, '/workspaces/laika/Jsonoptimiser')
+        # Utiliser le chemin relatif au fichier app.py
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        json_app_path = os.path.join(current_dir, 'Jsonoptimiser', 'json.py')
         
-        # Charger le module sans l'exécuter
-        spec = importlib.util.spec_from_file_location("json_app", "/workspaces/laika/Jsonoptimiser/json.py")
-        json_app = importlib.util.module_from_spec(spec)
-        
-        # L'exécution du module charge l'interface Streamlit
-        spec.loader.exec_module(json_app)
+        if not os.path.exists(json_app_path):
+            st.error(f"❌ Fichier introuvable: {json_app_path}")
+            st.info("Vérifiez que le dossier Jsonoptimiser existe.")
+        else:
+            sys.path.insert(0, os.path.join(current_dir, 'Jsonoptimiser'))
+            
+            # Charger le module sans l'exécuter
+            spec = importlib.util.spec_from_file_location("json_app", json_app_path)
+            json_app = importlib.util.module_from_spec(spec)
+            
+            # L'exécution du module charge l'interface Streamlit
+            spec.loader.exec_module(json_app)
     except Exception as e:
         st.error(f"❌ Erreur lors du chargement de Structured Data Analyser: {e}")
         st.info("Assurez-vous que toutes les dépendances sont installées.")
+        import traceback
+        with st.expander("Détails de l'erreur"):
+            st.code(traceback.format_exc())
 
 elif selected == "Maillage Interne":
     # Importer et exécuter l'app Maillage Interne
     import sys
     import importlib.util
+    import os
     
     try:
-        sys.path.insert(0, '/workspaces/laika/blablamaillage-interneblabla')
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        maillage_app_path = os.path.join(current_dir, 'blablamaillage-interneblabla', 'app.py')
         
-        # Charger le module
-        spec = importlib.util.spec_from_file_location("maillage_app", "/workspaces/laika/blablamaillage-interneblabla/app.py")
-        maillage_app = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(maillage_app)
-        
-        # Exécuter la fonction main si elle existe
-        if hasattr(maillage_app, 'main'):
-            maillage_app.main()
+        if not os.path.exists(maillage_app_path):
+            st.error(f"❌ Fichier introuvable: {maillage_app_path}")
+        else:
+            sys.path.insert(0, os.path.join(current_dir, 'blablamaillage-interneblabla'))
+            
+            # Charger le module
+            spec = importlib.util.spec_from_file_location("maillage_app", maillage_app_path)
+            maillage_app = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(maillage_app)
+            
+            # Exécuter la fonction main si elle existe
+            if hasattr(maillage_app, 'main'):
+                maillage_app.main()
     except Exception as e:
         st.error(f"❌ Erreur lors du chargement de Maillage Interne: {e}")
         st.info("Assurez-vous que toutes les dépendances sont installées.")
+        import traceback
+        with st.expander("Détails de l'erreur"):
+            st.code(traceback.format_exc())
 
 elif selected == "Conversational Queries":
     # Importer et exécuter l'app Conversational Queries
     import sys
     import importlib.util
+    import os
     
     try:
-        sys.path.insert(0, '/workspaces/laika/conversational-queries')
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        conv_app_path = os.path.join(current_dir, 'conversational-queries', 'app.py')
         
-        # Charger le module
-        spec = importlib.util.spec_from_file_location("conv_app", "/workspaces/laika/conversational-queries/app.py")
-        conv_app = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(conv_app)
-        
-        # Exécuter la fonction main
-        if hasattr(conv_app, 'main'):
-            conv_app.main()
+        if not os.path.exists(conv_app_path):
+            st.error(f"❌ Fichier introuvable: {conv_app_path}")
+        else:
+            sys.path.insert(0, os.path.join(current_dir, 'conversational-queries'))
+            
+            # Charger le module
+            spec = importlib.util.spec_from_file_location("conv_app", conv_app_path)
+            conv_app = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(conv_app)
+            
+            # Exécuter la fonction main
+            if hasattr(conv_app, 'main'):
+                conv_app.main()
     except Exception as e:
         st.error(f"❌ Erreur lors du chargement de Conversational Queries: {e}")
         st.info("Assurez-vous que toutes les dépendances sont installées.")
+        import traceback
+        with st.expander("Détails de l'erreur"):
+            st.code(traceback.format_exc())
