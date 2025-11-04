@@ -1,53 +1,109 @@
 import streamlit as st
-from streamlit_option_menu import option_menu
 
 # Configuration de la page
 st.set_page_config(
-    page_title="Hub SEO & Analytics",
+    page_title="AstroSuite SEO",
     page_icon="🚀",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Menu latéral
+# CSS personnalisé simplifié
+st.markdown("""
+<style>
+    /* Fond blanc général */
+    .stApp {
+        background-color: #ffffff;
+        color: #000000;
+    }
+    
+    /* Sidebar simple */
+    [data-testid="stSidebar"] {
+        background-color: #f8f9fa;
+        border-right: 1px solid #e0e0e0;
+    }
+    
+    /* Titre de la sidebar */
+    .sidebar-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #000000;
+        text-align: center;
+        padding: 20px 0 10px 0;
+    }
+    
+    /* Boutons du menu */
+    .stButton>button {
+        background-color: #ffffff;
+        color: #000000;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        padding: 10px 16px;
+        width: 100%;
+        text-align: left;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        margin-bottom: 4px;
+    }
+    
+    .stButton>button:hover {
+        background-color: #f0f0f0;
+        border-color: #000000;
+    }
+    
+    /* Footer de la sidebar */
+    .sidebar-footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 11px;
+        color: #666666;
+        border-top: 1px solid #e0e0e0;
+        margin-top: 30px;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Menu latéral simplifié
 with st.sidebar:
-    st.title("🚀 Hub SEO & Analytics")
+    st.markdown('<div class="sidebar-title">🚀 AstroSuite</div>', unsafe_allow_html=True)
     st.markdown("---")
     
-    selected = option_menu(
-        menu_title=None,
-        options=["Accueil", "Structured Data Analyser", "Maillage Interne", "Conversational Queries"],
-        icons=["house", "code-square", "diagram-3", "chat-dots"],
-        menu_icon="cast",
-        default_index=0,
-        styles={
-            "container": {"padding": "0!important", "background-color": "#fafafa"},
-            "icon": {"color": "#0066cc", "font-size": "20px"},
-            "nav-link": {
-                "font-size": "16px",
-                "text-align": "left",
-                "margin": "0px",
-                "--hover-color": "#eee",
-            },
-            "nav-link-selected": {"background-color": "#0066cc"},
-        }
-    )
+    # Initialisation de la sélection
+    if 'selected_page' not in st.session_state:
+        st.session_state.selected_page = "Accueil"
     
-    st.markdown("---")
-    st.markdown("### 📚 À propos")
-    st.info(
-        "Cette application regroupe plusieurs outils SEO et d'analyse de données. "
-        "Sélectionnez un outil dans le menu ci-dessus pour commencer."
-    )
+    # Menu simple sans catégories
+    if st.button("🏠 Accueil", key="home", use_container_width=True):
+        st.session_state.selected_page = "Accueil"
+        st.rerun()
+    
+    if st.button("� Structured Data Analyser", key="structured_data", use_container_width=True):
+        st.session_state.selected_page = "Structured Data Analyser"
+        st.rerun()
+    
+    if st.button("🔗 Maillage Interne", key="maillage", use_container_width=True):
+        st.session_state.selected_page = "Maillage Interne"
+        st.rerun()
+    
+    if st.button("💬 Questions Conversationnelles", key="questions", use_container_width=True):
+        st.session_state.selected_page = "Conversational Queries"
+        st.rerun()
+    
+    st.markdown('<div class="sidebar-footer">AstroSuite © 2025</div>', unsafe_allow_html=True)
+
+# Récupération de la page sélectionnée
+selected = st.session_state.selected_page
 
 # Chargement de l'application sélectionnée
 if selected == "Accueil":
-    st.title("🏠 Bienvenue sur le Hub SEO & Analytics")
+    st.title("🏠 Bienvenue dans l'AstroSuite")
     
     st.markdown("""
-    ## 🎯 Outils disponibles
+    ## 🎯 Vos outils SEO professionnels
     
-    Cette plateforme regroupe trois applications puissantes pour optimiser votre stratégie SEO :
+    L'AstroSuite regroupe une collection d'outils SEO puissants pour optimiser votre stratégie digitale.
+    Naviguez dans les différentes sections via le menu latéral.
     """)
     
     col1, col2, col3 = st.columns(3)
@@ -55,41 +111,44 @@ if selected == "Accueil":
     with col1:
         st.markdown("### 🔍 Structured Data Analyser")
         st.markdown("""
-        **Analysez et optimisez vos données structurées**
+        Analysez et optimisez vos données structurées
         
         - Extraction de schémas JSON-LD
-        - Comparaison avec la concurrence
-        - Génération automatique de données manquantes
-        - Identification des opportunités SEO
-        
-        📊 Parfait pour améliorer votre présence dans les résultats enrichis Google.
+        - Comparaison concurrentielle
+        - Génération automatique
+        - Optimisation SEO
         """)
+        if st.button("Accéder →", key="goto_structured"):
+            st.session_state.selected_page = "Structured Data Analyser"
+            st.rerun()
     
     with col2:
         st.markdown("### 🔗 Maillage Interne")
         st.markdown("""
-        **Optimisez votre stratégie de liens internes**
+        Optimisez votre stratégie de liens internes
         
-        - Analyse des opportunités de maillage
+        - Analyse opportunités de liens
         - Détection automatique des ancres
-        - Croisement GSC + contenu HTML
+        - Croisement GSC + HTML
         - Export des recommandations
-        
-        🎯 Améliorez votre crawl budget et la distribution du PageRank.
         """)
+        if st.button("Accéder →", key="goto_maillage"):
+            st.session_state.selected_page = "Maillage Interne"
+            st.rerun()
     
     with col3:
-        st.markdown("### 💬 Conversational Queries")
+        st.markdown("### 💬 Questions Conversationnelles")
         st.markdown("""
-        **Générez des questions conversationnelles optimisées**
+        Générez des questions optimisées pour le SEO
         
         - Suggestions Google multi-niveaux
         - Enrichissement DataForSEO
         - Génération de questions via IA
         - Analyse thématique
-        
-        🤖 Créez du contenu adapté à la recherche vocale et FAQ.
         """)
+        if st.button("Accéder →", key="goto_questions"):
+            st.session_state.selected_page = "Conversational Queries"
+            st.rerun()
     
     st.markdown("---")
     
@@ -100,26 +159,7 @@ if selected == "Accueil":
     2. **Configurez vos paramètres** selon vos besoins
     3. **Uploadez vos données** ou entrez vos mots-clés
     4. **Lancez l'analyse** et exploitez les résultats
-    
-    ### 💡 Conseils d'utilisation
-    
-    - **Structured Data Analyser** : Préparez le code HTML de votre site et de vos concurrents
-    - **Maillage Interne** : Exportez vos données GSC et crawlez votre site avec Screaming Frog
-    - **Conversational Queries** : Munissez-vous d'une clé API OpenAI et optionnellement DataForSEO
-    
-    ### 🔧 Support et Documentation
-    
-    Chaque outil dispose de sa propre documentation intégrée. Consultez les sections d'aide
-    pour des instructions détaillées.
     """)
-    
-    st.markdown("---")
-    st.markdown(
-        "<div style='text-align: center; color: #666;'>"
-        "Développé avec ❤️ pour optimiser votre SEO"
-        "</div>",
-        unsafe_allow_html=True
-    )
 
 elif selected == "Structured Data Analyser":
     # Importer et exécuter l'app JSON Optimiser
