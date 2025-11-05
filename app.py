@@ -16,58 +16,63 @@ st.markdown("""
         border-right: 1px solid rgba(250, 250, 250, 0.1);
     }
     
+    /* Conteneur de la sidebar */
+    [data-testid="stSidebar"] > div:first-child {
+        padding-top: 2rem;
+    }
+    
     /* Titre de la sidebar */
     .sidebar-title {
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 600;
-        padding: 24px 20px 32px 20px;
+        padding: 0 20px 24px 20px;
+    }
+    
+    /* Réduire l'espacement entre les boutons */
+    .stButton {
+        margin-bottom: 0 !important;
+    }
+    
+    div[data-testid="stVerticalBlock"] > div {
+        gap: 0 !important;
     }
     
     /* Cacher les boutons Streamlit par défaut et adopter le style de l'image */
     .stButton>button {
         border: none !important;
         background: transparent !important;
-        padding: 10px 20px !important;
+        padding: 8px 20px !important;
         width: 100%;
         text-align: left;
         font-size: 15px !important;
         font-weight: 400 !important;
-        color: rgba(250, 250, 250, 0.8) !important;
+        color: rgba(250, 250, 250, 0.75) !important;
         box-shadow: none !important;
         border-radius: 8px !important;
         margin: 0 !important;
-        line-height: 1.5 !important;
+        line-height: 1.6 !important;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+        transition: all 0.15s ease !important;
     }
     
     .stButton>button:hover {
         background-color: rgba(250, 250, 250, 0.08) !important;
-        color: rgba(250, 250, 250, 1) !important;
+        color: rgba(250, 250, 250, 0.95) !important;
     }
     
-    .stButton>button:focus {
+    .stButton>button:focus:not(:active) {
         background-color: rgba(250, 250, 250, 0.12) !important;
         color: rgba(250, 250, 250, 1) !important;
-        font-weight: 500 !important;
-    }
-    
-    /* Espacement entre les éléments du menu */
-    .element-container {
-        margin-bottom: 2px !important;
     }
     
     /* Footer de la sidebar */
     .sidebar-footer {
         text-align: center;
-        padding: 20px;
+        padding: 16px 20px;
         font-size: 11px;
-        opacity: 0.5;
-        border-top: 1px solid rgba(250, 250, 250, 0.1);
-        margin-top: auto;
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        left: 0;
+        opacity: 0.4;
+        margin-top: 40px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
 </style>
 """, unsafe_allow_html=True)
