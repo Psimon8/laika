@@ -99,6 +99,19 @@ def fetch_html_from_url(url):
         st.error(f"❌ Erreur lors de la récupération de {url}: {str(e)}")
         return None
 
+def clean_url_for_display(url):
+    """Nettoie l'URL pour l'affichage : retire le protocole et www"""
+    # Retirer http:// ou https://
+    cleaned = url.replace('https://', '').replace('http://', '')
+    # Retirer www. si présent
+    cleaned = cleaned.replace('www.', '')
+    # Retirer le slash final si présent
+    cleaned = cleaned.rstrip('/')
+    # Retirer le path si présent (garder seulement le domaine)
+    if '/' in cleaned:
+        cleaned = cleaned.split('/')[0]
+    return cleaned
+
 def display_comparison_results(client_schema, competitor_schemas, competitor_names):
     """Affiche les résultats de la comparaison"""
     # Construction du tableau
@@ -263,7 +276,8 @@ with tab1:
                                 for block in comp_data:
                                     comp_schema |= flatten_schema(block)
                                 competitor_schemas.append(comp_schema)
-                                competitor_names.append(f"Concurrent {i+1}")
+                                # Utiliser l'URL nettoyée comme nom
+                                competitor_names.append(clean_url_for_display(comp_url))
 
                     if competitor_schemas:
                         st.success("✅ Analyse terminée !")
