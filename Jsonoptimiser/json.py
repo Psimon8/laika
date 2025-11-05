@@ -34,7 +34,7 @@ def flatten_schema(jsonld_data):
                 if obj_type:
                     results.add((obj_type, '@type'))
             for key, value in obj.items():
-                if key != '@type':
+                if key != '@type' and obj_type:  # On ajoute uniquement si obj_type n'est pas None
                     results.add((obj_type, key))
                     recurse(value, obj_type)
         elif isinstance(obj, list):
@@ -65,9 +65,10 @@ def display_comparison_results(client_schema, competitor_schemas, competitor_nam
 
     rows = []
     missing_opportunities = []
-    for item_type, prop in sorted(all_keys):
+    # Tri sécurisé en gérant les None potentiels
+    for item_type, prop in sorted(all_keys, key=lambda x: (x[0] or '', x[1] or '')):
         row = {
-            "Type": item_type,
+            "Type": item_type or "Non défini",
             "Propriété": prop,
             "Votre site": "✅" if (item_type, prop) in client_schema else "❌"
         }
