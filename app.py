@@ -2,7 +2,7 @@ import streamlit as st
 
 # Configuration de la page
 st.set_page_config(
-    page_title="AstroSuite SEO",
+    page_title="WIP SEO",
     page_icon="🚀",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -65,7 +65,7 @@ st.markdown("""
 
 # Menu latéral simplifié
 with st.sidebar:
-    st.markdown('<div class="sidebar-title">🚀 AstroSuite</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sidebar-title">🚀 WIP SEO</div>', unsafe_allow_html=True)
     
     # Initialisation de la sélection
     if 'selected_page' not in st.session_state:
@@ -88,19 +88,19 @@ with st.sidebar:
         st.session_state.selected_page = "Conversational Queries"
         st.rerun()
     
-    st.markdown('<div class="sidebar-footer">AstroSuite © 2025</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sidebar-footer">Y&N © 2025</div>', unsafe_allow_html=True)
 
 # Récupération de la page sélectionnée
 selected = st.session_state.selected_page
 
 # Chargement de l'application sélectionnée
 if selected == "Accueil":
-    st.title("🏠 Bienvenue dans l'AstroSuite")
+    st.title(":)")
     
     st.markdown("""
     ## 🎯 Vos outils SEO professionnels
     
-    L'AstroSuite regroupe une collection d'outils SEO puissants pour optimiser votre stratégie digitale.
+    Une collection d'outils SEO puissants pour optimiser votre stratégie digitale.
     Naviguez dans les différentes sections via le menu latéral.
     """)
     
