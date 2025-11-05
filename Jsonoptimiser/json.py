@@ -35,15 +35,19 @@ st.markdown("""
     }
     
     /* Bouton blanc avec texte noir */
-    .analyze-button button {
-        background-color: white !important;
-        color: black !important;
+    .analyze-button button,
+    .analyze-button button:active,
+    .analyze-button button:focus {
+        background-color: #FFFFFF !important;
+        color: #000000 !important;
         border: 1px solid rgba(250, 250, 250, 0.2) !important;
         font-weight: 500 !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
     }
     
     .analyze-button button:hover {
-        background-color: rgba(255, 255, 255, 0.9) !important;
+        background-color: #F0F0F0 !important;
+        color: #000000 !important;
     }
 </style>
 """, unsafe_allow_html=True)
