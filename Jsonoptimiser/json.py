@@ -7,16 +7,29 @@ import json
 import datetime
 import requests
 
-st.set_page_config(page_title="🚀 Structured Data Analyser", layout="wide")
+st.set_page_config(
+    page_title="🚀 Structured Data Analyser", 
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items={
+        'Get Help': None,
+        'Report a bug': None,
+        'About': None
+    }
+)
 
-# CSS pour fixer le header et les tabs
+# CSS pour fixer le header et les tabs + forcer le dark mode
 st.markdown("""
 <style>
+    /* Forcer le dark mode */
+    :root {
+        color-scheme: dark;
+    }
+    
     /* Fixer le header */
     .main > div:first-child {
         position: sticky;
         top: 0;
-        background-color: white;
         z-index: 999;
         padding-bottom: 1rem;
     }
@@ -25,7 +38,6 @@ st.markdown("""
     .stTabs {
         position: sticky;
         top: 80px;
-        background-color: white;
         z-index: 998;
         padding: 1rem 0;
     }
@@ -33,6 +45,11 @@ st.markdown("""
     /* Style pour les colonnes */
     [data-testid="column"] {
         padding: 1rem;
+    }
+    
+    /* Retirer les arrière-plans forcés */
+    .stApp {
+        background-color: inherit;
     }
 </style>
 """, unsafe_allow_html=True)
