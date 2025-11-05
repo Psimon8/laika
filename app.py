@@ -21,20 +21,44 @@ st.markdown("""
         font-size: 24px;
         font-weight: 700;
         text-align: center;
-        padding: 20px 0 10px 0;
+        padding: 20px 0 30px 0;
     }
     
-    /* Retirer les bordures des boutons */
+    /* Style des liens de menu */
+    .menu-item {
+        padding: 12px 16px;
+        margin: 4px 0;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: background-color 0.2s ease;
+        font-size: 15px;
+        color: #FAFAFA;
+    }
+    
+    .menu-item:hover {
+        background-color: rgba(250, 250, 250, 0.1);
+    }
+    
+    .menu-item.active {
+        background-color: rgba(250, 250, 250, 0.15);
+        font-weight: 500;
+    }
+    
+    /* Cacher les boutons Streamlit par défaut */
     .stButton>button {
         border: none !important;
-        border-radius: 6px;
-        padding: 10px 16px;
+        background: transparent !important;
+        padding: 12px 16px;
         width: 100%;
         text-align: left;
-        font-size: 14px;
-        font-weight: 500;
-        transition: all 0.2s ease;
-        margin-bottom: 4px;
+        font-size: 15px;
+        font-weight: 400;
+        color: #FAFAFA !important;
+        box-shadow: none !important;
+    }
+    
+    .stButton>button:hover {
+        background-color: rgba(250, 250, 250, 0.1) !important;
     }
     
     /* Footer de la sidebar */
@@ -45,6 +69,9 @@ st.markdown("""
         opacity: 0.6;
         border-top: 1px solid rgba(250, 250, 250, 0.1);
         margin-top: 30px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -52,42 +79,25 @@ st.markdown("""
 # Menu latéral simplifié
 with st.sidebar:
     st.markdown('<div class="sidebar-title">🚀 AstroSuite</div>', unsafe_allow_html=True)
-    st.markdown("---")
     
     # Initialisation de la sélection
     if 'selected_page' not in st.session_state:
         st.session_state.selected_page = "Accueil"
     
-    # Bouton Accueil uniquement
-    if st.button("🏠 Accueil", key="home", use_container_width=True):
+    # Menu avec liens simples
+    if st.button("Home", key="home", use_container_width=True):
         st.session_state.selected_page = "Accueil"
         st.rerun()
     
-    st.markdown("---")
-    
-    # Menu déroulant pour les outils
-    tool_options = [
-        "Sélectionner un outil...",
-        "🔍 Structured Data Analyser",
-        "🔗 Maillage Interne",
-        "💬 Questions Conversationnelles"
-    ]
-    
-    selected_tool = st.selectbox(
-        "Outils SEO",
-        tool_options,
-        index=0,
-        key="tool_selector"
-    )
-    
-    # Gérer la sélection du menu déroulant
-    if selected_tool == "🔍 Structured Data Analyser":
+    if st.button("Structured Data Analyser", key="structured_data", use_container_width=True):
         st.session_state.selected_page = "Structured Data Analyser"
         st.rerun()
-    elif selected_tool == "🔗 Maillage Interne":
+    
+    if st.button("Maillage Interne", key="maillage", use_container_width=True):
         st.session_state.selected_page = "Maillage Interne"
         st.rerun()
-    elif selected_tool == "💬 Questions Conversationnelles":
+    
+    if st.button("Questions Conversationnelles", key="questions", use_container_width=True):
         st.session_state.selected_page = "Conversational Queries"
         st.rerun()
     
