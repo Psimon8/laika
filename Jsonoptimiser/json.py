@@ -9,6 +9,34 @@ import requests
 
 st.set_page_config(page_title="🚀 Structured Data Analyser", layout="wide")
 
+# CSS pour fixer le header et les tabs
+st.markdown("""
+<style>
+    /* Fixer le header */
+    .main > div:first-child {
+        position: sticky;
+        top: 0;
+        background-color: white;
+        z-index: 999;
+        padding-bottom: 1rem;
+    }
+    
+    /* Améliorer l'espacement */
+    .stTabs {
+        position: sticky;
+        top: 80px;
+        background-color: white;
+        z-index: 998;
+        padding: 1rem 0;
+    }
+    
+    /* Style pour les colonnes */
+    [data-testid="column"] {
+        padding: 1rem;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 st.title("🚀 Structured Data Analyser")
 
 def extract_jsonld_schema(html_content, url="http://example.com"):
@@ -162,19 +190,23 @@ with tab1:
     st.header("🔗 Vérification par URLs")
     st.markdown("Renseignez les URLs pour analyser automatiquement les données structurées.")
     
-    # URL du client
-    st.subheader("🟢 Votre site")
-    client_url = st.text_input("URL de votre site", placeholder="https://www.exemple.com")
-
+    # Créer 2 colonnes pour Votre site et Concurrents
+    col1, col2 = st.columns(2)
     
-    # URLs des concurrents
-    st.subheader("🔴 Concurrents")
-    competitor_count_url = st.number_input("Nombre de concurrents", min_value=1, max_value=5, value=1, step=1, key="url_comp_count")
+    # Colonne 1: URL du client
+    with col1:
+        st.subheader("🟢 Votre site")
+        client_url = st.text_input("URL de votre site", placeholder="https://www.exemple.com", key="client_url_input")
 
-    competitor_urls = []
-    for i in range(competitor_count_url):
-        url = st.text_input(f"URL du concurrent {i+1}", key=f"url_competitor_{i}", placeholder=f"https://www.concurrent{i+1}.com")
-        competitor_urls.append(url)
+    # Colonne 2: URLs des concurrents
+    with col2:
+        st.subheader("🔴 Concurrents")
+        competitor_count_url = st.number_input("Nombre de concurrents", min_value=1, max_value=5, value=2, step=1, key="url_comp_count")
+
+        competitor_urls = []
+        for i in range(competitor_count_url):
+            url = st.text_input(f"URL du concurrent {i+1}", key=f"url_competitor_{i}", placeholder=f"https://www.concurrent{i+1}.com")
+            competitor_urls.append(url)
 
     # Bouton de comparaison
     if st.button("🔍 Analyser les URLs", key="analyze_urls"):
@@ -221,23 +253,30 @@ with tab2:
     st.header("📝 Saisie HTML Manuelle")
     st.markdown("Collez directement le code HTML pour une analyse personnalisée.")
     
+    # Créer 2 colonnes pour Votre site et Concurrents
+    col1, col2 = st.columns(2)
+    
     # ------------------------
-    # 🟢 ZONE DE SAISIE
+    # 🟢 ZONE DE SAISIE CLIENT
     # ------------------------
+    with col1:
+        st.subheader("🟢 Votre site")
+        client_html = st.text_area("Code HTML complet de votre site", height=400, key="manual_client_html")
 
-    st.subheader("🟢 Votre site")
-    client_html = st.text_area("Code HTML complet de votre site", height=250, key="manual_client_html")
+    # ------------------------
+    # 🔴 ZONE DE SAISIE CONCURRENTS
+    # ------------------------
+    with col2:
+        st.subheader("🔴 Concurrents")
+        competitor_count = st.number_input("Nombre de concurrents", min_value=1, max_value=5, value=2, step=1, key="manual_comp_count")
 
-    st.subheader("🔴 Concurrents")
-    competitor_count = st.number_input("Nombre de concurrents", min_value=1, max_value=5, value=1, step=1, key="manual_comp_count")
-
-    competitor_htmls = []
-    competitor_names = []
-    for i in range(competitor_count):
-        name = st.text_input(f"Nom du site Concurrent {i+1}", key=f"manual_name_{i}", value=f"Concurrent {i+1}")
-        html = st.text_area(f"Code HTML - {name}", key=f"manual_competitor_{i}", height=250)
-        competitor_names.append(name)
-        competitor_htmls.append(html)
+        competitor_htmls = []
+        competitor_names = []
+        for i in range(competitor_count):
+            name = st.text_input(f"Nom du site Concurrent {i+1}", key=f"manual_name_{i}", value=f"Concurrent {i+1}")
+            html = st.text_area(f"Code HTML - {name}", key=f"manual_competitor_{i}", height=200)
+            competitor_names.append(name)
+            competitor_htmls.append(html)
 
     # ------------------------
     # 🔍 COMPARAISON
