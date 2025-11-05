@@ -26,8 +26,13 @@ def flatten_schema(jsonld_data):
     def recurse(obj, current_type=None):
         if isinstance(obj, dict):
             obj_type = obj.get('@type', current_type)
+            # Gestion du cas où @type peut être une liste ou une chaîne
             if obj_type:
-                results.add((obj_type, '@type'))
+                if isinstance(obj_type, list):
+                    # Si @type est une liste, on prend le premier élément
+                    obj_type = obj_type[0] if obj_type else current_type
+                if obj_type:
+                    results.add((obj_type, '@type'))
             for key, value in obj.items():
                 if key != '@type':
                     results.add((obj_type, key))
