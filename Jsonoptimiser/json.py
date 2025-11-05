@@ -40,14 +40,16 @@ st.markdown("""
     .analyze-button button:focus {
         background-color: #FFFFFF !important;
         color: #000000 !important;
-        border: 1px solid rgba(250, 250, 250, 0.2) !important;
+        border: 2px solid #9333EA !important;
         font-weight: 500 !important;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+        border-radius: 6px !important;
     }
     
     .analyze-button button:hover {
         background-color: #F0F0F0 !important;
         color: #000000 !important;
+        border: 2px solid #7C3AED !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -212,19 +214,12 @@ tab1, tab2 = st.tabs(["🔗 Vérification par URLs", "📝 Code HTML Manuel"])
 # ========================
 
 with tab1:
-    # Titre et bouton sur la même ligne
-    col_title, col_button = st.columns([3, 1])
-    with col_title:
-        st.header("🔗 Vérification par URLs")
-    with col_button:
-        st.markdown('<div class="analyze-button">', unsafe_allow_html=True)
-        analyze_clicked = st.button("🔍 Analyser les URLs", key="analyze_urls", use_container_width=True)
-        st.markdown('</div>', unsafe_allow_html=True)
+    st.header("🔗 Vérification par URLs")
     
     # Créer 2 colonnes pour Votre site et Concurrents
     col1, col2 = st.columns(2)
     
-    # Colonne 1: URL du client
+    # Colonne 1: URL du client + bouton analyser
     with col1:
         st.subheader("URL du site")
         client_url = st.text_input(
@@ -233,6 +228,11 @@ with tab1:
             key="client_url_input",
             label_visibility="collapsed"
         )
+        
+        # Bouton d'analyse dans la même colonne
+        st.markdown('<div class="analyze-button">', unsafe_allow_html=True)
+        analyze_clicked = st.button("🔍 Analyser les URLs", key="analyze_urls", use_container_width=True)
+        st.markdown('</div>', unsafe_allow_html=True)
 
     # Colonne 2: URLs des concurrents
     with col2:
@@ -248,7 +248,7 @@ with tab1:
         # Traiter les URLs (une par ligne)
         competitor_urls = [url.strip() for url in competitor_urls_text.split('\n') if url.strip()][:5]
 
-    # Bouton de comparaison (logique déplacée)
+    # Bouton de comparaison (logique)
     if analyze_clicked:
         if not client_url.strip():
             st.error("❌ Merci de fournir l'URL de votre site.")
