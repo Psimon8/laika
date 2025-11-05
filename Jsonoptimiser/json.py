@@ -112,7 +112,7 @@ def clean_url_for_display(url):
         cleaned = cleaned.split('/')[0]
     return cleaned
 
-def display_comparison_results(client_schema, competitor_schemas, competitor_names):
+def display_comparison_results(client_schema, competitor_schemas, competitor_names, client_name="Votre site"):
     """Affiche les résultats de la comparaison"""
     # Construction du tableau
     all_keys = set(client_schema)
@@ -126,7 +126,7 @@ def display_comparison_results(client_schema, competitor_schemas, competitor_nam
         row = {
             "Type": item_type or "Non défini",
             "Propriété": prop,
-            "Votre site": "✅" if (item_type, prop) in client_schema else "❌"
+            client_name: "✅" if (item_type, prop) in client_schema else "❌"
         }
 
         at_least_one_has_it = False
@@ -136,7 +136,7 @@ def display_comparison_results(client_schema, competitor_schemas, competitor_nam
                 at_least_one_has_it = True
             row[competitor_names[i]] = has_it
 
-        if row["Votre site"] == "❌" and at_least_one_has_it:
+        if row[client_name] == "❌" and at_least_one_has_it:
             missing_opportunities.append((item_type, prop))
 
         rows.append(row)
@@ -262,6 +262,9 @@ with tab1:
                     client_schema = set()
                     for block in client_data:
                         client_schema |= flatten_schema(block)
+                    
+                    # Nom nettoyé du site client
+                    client_name = clean_url_for_display(client_url)
 
                     # Récupération HTML des concurrents
                     competitor_schemas = []
@@ -282,7 +285,7 @@ with tab1:
                     if competitor_schemas:
                         st.success("✅ Analyse terminée !")
                         st.header("📈 Résultat Comparatif")
-                        display_comparison_results(client_schema, competitor_schemas, competitor_names)
+                        display_comparison_results(client_schema, competitor_schemas, competitor_names, client_name)
                     else:
                         st.warning("⚠️ Aucun concurrent n'a pu être analysé.")
 
