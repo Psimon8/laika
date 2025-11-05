@@ -18,47 +18,42 @@ st.markdown("""
     
     /* Titre de la sidebar */
     .sidebar-title {
-        font-size: 24px;
-        font-weight: 700;
-        text-align: center;
-        padding: 20px 0 30px 0;
+        font-size: 20px;
+        font-weight: 600;
+        padding: 24px 20px 32px 20px;
     }
     
-    /* Style des liens de menu */
-    .menu-item {
-        padding: 12px 16px;
-        margin: 4px 0;
-        cursor: pointer;
-        border-radius: 6px;
-        transition: background-color 0.2s ease;
-        font-size: 15px;
-        color: #FAFAFA;
-    }
-    
-    .menu-item:hover {
-        background-color: rgba(250, 250, 250, 0.1);
-    }
-    
-    .menu-item.active {
-        background-color: rgba(250, 250, 250, 0.15);
-        font-weight: 500;
-    }
-    
-    /* Cacher les boutons Streamlit par défaut */
+    /* Cacher les boutons Streamlit par défaut et adopter le style de l'image */
     .stButton>button {
         border: none !important;
         background: transparent !important;
-        padding: 12px 16px;
+        padding: 10px 20px !important;
         width: 100%;
         text-align: left;
-        font-size: 15px;
-        font-weight: 400;
-        color: #FAFAFA !important;
+        font-size: 15px !important;
+        font-weight: 400 !important;
+        color: rgba(250, 250, 250, 0.8) !important;
         box-shadow: none !important;
+        border-radius: 8px !important;
+        margin: 0 !important;
+        line-height: 1.5 !important;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
     }
     
     .stButton>button:hover {
-        background-color: rgba(250, 250, 250, 0.1) !important;
+        background-color: rgba(250, 250, 250, 0.08) !important;
+        color: rgba(250, 250, 250, 1) !important;
+    }
+    
+    .stButton>button:focus {
+        background-color: rgba(250, 250, 250, 0.12) !important;
+        color: rgba(250, 250, 250, 1) !important;
+        font-weight: 500 !important;
+    }
+    
+    /* Espacement entre les éléments du menu */
+    .element-container {
+        margin-bottom: 2px !important;
     }
     
     /* Footer de la sidebar */
@@ -66,12 +61,13 @@ st.markdown("""
         text-align: center;
         padding: 20px;
         font-size: 11px;
-        opacity: 0.6;
+        opacity: 0.5;
         border-top: 1px solid rgba(250, 250, 250, 0.1);
-        margin-top: 30px;
+        margin-top: auto;
         position: absolute;
         bottom: 0;
         width: 100%;
+        left: 0;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -84,7 +80,7 @@ with st.sidebar:
     if 'selected_page' not in st.session_state:
         st.session_state.selected_page = "Accueil"
     
-    # Menu avec liens simples
+    # Menu avec liens simples - espacement minimal
     if st.button("Home", key="home", use_container_width=True):
         st.session_state.selected_page = "Accueil"
         st.rerun()
