@@ -31,7 +31,33 @@ streamlit run app.py
 #### Objectif
 Comparer et optimiser vos données structurées JSON-LD par rapport à la concurrence.
 
-#### Comment l'utiliser
+#### Deux modes d'analyse disponibles
+
+L'application propose **2 onglets** pour s'adapter à vos besoins :
+
+##### 📑 **Onglet 1 : 🔗 Vérification par URLs** *(Nouveau)*
+
+Le mode le plus simple et rapide !
+
+1. **Renseignez les URLs**
+   - Entrez l'URL de votre site (ex: `https://www.monsite.com`)
+   - Définissez le nombre de concurrents (1 à 5)
+   - Entrez les URLs des sites concurrents
+
+2. **Lancez l'analyse automatique**
+   - Cliquez sur "🔍 Analyser les URLs"
+   - L'application récupère automatiquement le HTML de chaque URL
+   - Extraction et analyse des données structurées en temps réel
+
+3. **Avantages**
+   - ✅ Aucun copier-coller nécessaire
+   - ✅ Analyse directe depuis les URLs
+   - ✅ Gain de temps considérable
+   - ✅ Données toujours à jour
+
+##### 📑 **Onglet 2 : 📝 Code HTML Manuel**
+
+Le mode traditionnel pour une analyse personnalisée.
 
 1. **Préparez vos données HTML**
    - Copiez le code HTML complet de votre page (incluant les balises `<script type="application/ld+json">`)
@@ -40,15 +66,23 @@ Comparer et optimiser vos données structurées JSON-LD par rapport à la concur
 2. **Entrez les données dans l'interface**
    - Collez votre code HTML dans la zone "Votre site"
    - Définissez le nombre de concurrents à analyser
+   - Donnez un nom à chaque concurrent
    - Collez le code HTML de chaque concurrent
 
 3. **Lancez la comparaison**
    - Cliquez sur "🔍 Comparer les schémas"
    - Attendez l'analyse
 
+4. **Avantages**
+   - ✅ Contrôle total sur le HTML analysé
+   - ✅ Utile pour tester avant mise en production
+   - ✅ Analyse de code HTML local ou modifié
+
+#### Résultats de l'analyse (communs aux 2 onglets)
+
 4. **Analysez les résultats**
-   - **Tableau comparatif par type** : Visualisez les différences par type de schema
-   - **Rapport d'opportunités** : Identifiez ce qui manque sur votre site
+   - **Tableau comparatif par type** : Visualisez les différences par type de schema (Organization, Product, Article, etc.)
+   - **Rapport d'opportunités** : Identifiez les propriétés manquantes sur votre site
    - **Génération JSON-LD** : Obtenez le code à ajouter pour combler les lacunes
 
 5. **Implémentez les améliorations**
