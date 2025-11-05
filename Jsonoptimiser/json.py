@@ -33,6 +33,18 @@ st.markdown("""
     [data-testid="column"] {
         padding: 1rem;
     }
+    
+    /* Bouton blanc avec texte noir */
+    .analyze-button button {
+        background-color: white !important;
+        color: black !important;
+        border: 1px solid rgba(250, 250, 250, 0.2) !important;
+        font-weight: 500 !important;
+    }
+    
+    .analyze-button button:hover {
+        background-color: rgba(255, 255, 255, 0.9) !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -183,37 +195,44 @@ tab1, tab2 = st.tabs(["🔗 Vérification par URLs", "📝 Code HTML Manuel"])
 # ========================
 
 with tab1:
-    st.header("🔗 Vérification par URLs")
-    st.markdown("Renseignez les URLs pour analyser automatiquement les données structurées.")
+    # Titre et bouton sur la même ligne
+    col_title, col_button = st.columns([3, 1])
+    with col_title:
+        st.header("🔗 Vérification par URLs")
+    with col_button:
+        st.markdown('<div class="analyze-button">', unsafe_allow_html=True)
+        analyze_clicked = st.button("🔍 Analyser les URLs", key="analyze_urls", use_container_width=True)
+        st.markdown('</div>', unsafe_allow_html=True)
     
     # Créer 2 colonnes pour Votre site et Concurrents
     col1, col2 = st.columns(2)
     
     # Colonne 1: URL du client
     with col1:
-        st.subheader("🟢 Votre site")
-        client_url = st.text_input("URL de votre site", placeholder="https://www.exemple.com", key="client_url_input")
+        st.subheader("URL du site")
+        client_url = st.text_input(
+            "URL du site",
+            placeholder="https://www.exemple.com",
+            key="client_url_input",
+            label_visibility="collapsed"
+        )
 
     # Colonne 2: URLs des concurrents
     with col2:
-        st.subheader("🔴 Concurrents")
-        st.markdown("*Collez une URL par ligne (jusqu'à 5 concurrents)*")
+        st.subheader("URL de comparaison")
         competitor_urls_text = st.text_area(
-            "URLs des concurrents", 
-            height=150,
+            "URL de comparaison",
+            height=38,
             placeholder="https://www.concurrent1.com\nhttps://www.concurrent2.com\nhttps://www.concurrent3.com",
-            key="competitor_urls_textarea"
+            key="competitor_urls_textarea",
+            label_visibility="collapsed"
         )
         
         # Traiter les URLs (une par ligne)
         competitor_urls = [url.strip() for url in competitor_urls_text.split('\n') if url.strip()][:5]
-        
-        # Afficher le nombre d'URLs détectées
-        if competitor_urls:
-            st.info(f"📊 {len(competitor_urls)} concurrent(s) détecté(s)")
 
-    # Bouton de comparaison
-    if st.button("🔍 Analyser les URLs", key="analyze_urls"):
+    # Bouton de comparaison (logique déplacée)
+    if analyze_clicked:
         if not client_url.strip():
             st.error("❌ Merci de fournir l'URL de votre site.")
         else:
