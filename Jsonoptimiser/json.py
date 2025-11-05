@@ -10,7 +10,7 @@ import requests
 # Configuration déjà faite dans app.py principal
 # st.set_page_config est appelé uniquement dans app.py pour éviter les conflits
 
-# CSS pour fixer le header et les tabs
+# CSS minimal pour la mise en page
 st.markdown("""
 <style>
     /* Fixer le header */
@@ -32,24 +32,6 @@ st.markdown("""
     /* Style pour les colonnes */
     [data-testid="column"] {
         padding: 1rem;
-    }
-    
-    /* Bouton blanc avec texte noir */
-    .analyze-button button,
-    .analyze-button button:active,
-    .analyze-button button:focus {
-        background-color: #FFFFFF !important;
-        color: #000000 !important;
-        border: 2px solid #9333EA !important;
-        font-weight: 500 !important;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-        border-radius: 6px !important;
-    }
-    
-    .analyze-button button:hover {
-        background-color: #F0F0F0 !important;
-        color: #000000 !important;
-        border: 2px solid #7C3AED !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -230,9 +212,7 @@ with tab1:
         )
         
         # Bouton d'analyse dans la même colonne
-        st.markdown('<div class="analyze-button">', unsafe_allow_html=True)
-        analyze_clicked = st.button("🔍 Analyser les URLs", key="analyze_urls", use_container_width=True)
-        st.markdown('</div>', unsafe_allow_html=True)
+        analyze_clicked = st.button("🔍 Analyser les URLs", key="analyze_urls", use_container_width=True, type="primary")
 
     # Colonne 2: URLs des concurrents
     with col2:

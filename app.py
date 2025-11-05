@@ -8,14 +8,9 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# CSS personnalisé pour dark mode
+# CSS minimal pour la sidebar
 st.markdown("""
 <style>
-    /* Sidebar simple */
-    [data-testid="stSidebar"] {
-        border-right: 1px solid rgba(250, 250, 250, 0.1);
-    }
-    
     /* Conteneur de la sidebar */
     [data-testid="stSidebar"] > div:first-child {
         padding-top: 2rem;
@@ -47,33 +42,14 @@ st.markdown("""
     
     /* Style des boutons - alignés à gauche */
     .stButton>button {
-        border: none !important;
-        background: transparent !important;
         padding: 6px 20px !important;
         width: 100%;
         text-align: left !important;
         font-size: 15px !important;
-        font-weight: 400 !important;
-        color: rgba(250, 250, 250, 0.75) !important;
-        box-shadow: none !important;
-        border-radius: 6px !important;
         margin: 0 !important;
         height: auto !important;
         min-height: 0 !important;
         line-height: 1.4 !important;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
-        transition: all 0.15s ease !important;
-        display: block !important;
-    }
-    
-    .stButton>button:hover {
-        background-color: rgba(250, 250, 250, 0.08) !important;
-        color: rgba(250, 250, 250, 0.95) !important;
-    }
-    
-    .stButton>button:focus:not(:active) {
-        background-color: rgba(250, 250, 250, 0.12) !important;
-        color: rgba(250, 250, 250, 1) !important;
     }
     
     /* Footer de la sidebar */
@@ -83,7 +59,6 @@ st.markdown("""
         font-size: 11px;
         opacity: 0.4;
         margin-top: 40px;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
 </style>
 """, unsafe_allow_html=True)
