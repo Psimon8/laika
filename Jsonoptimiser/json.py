@@ -201,12 +201,20 @@ with tab1:
     # Colonne 2: URLs des concurrents
     with col2:
         st.subheader("🔴 Concurrents")
-        competitor_count_url = st.number_input("Nombre de concurrents", min_value=1, max_value=5, value=2, step=1, key="url_comp_count")
-
-        competitor_urls = []
-        for i in range(competitor_count_url):
-            url = st.text_input(f"URL du concurrent {i+1}", key=f"url_competitor_{i}", placeholder=f"https://www.concurrent{i+1}.com")
-            competitor_urls.append(url)
+        st.markdown("*Collez une URL par ligne (jusqu'à 5 concurrents)*")
+        competitor_urls_text = st.text_area(
+            "URLs des concurrents", 
+            height=150,
+            placeholder="https://www.concurrent1.com\nhttps://www.concurrent2.com\nhttps://www.concurrent3.com",
+            key="competitor_urls_textarea"
+        )
+        
+        # Traiter les URLs (une par ligne)
+        competitor_urls = [url.strip() for url in competitor_urls_text.split('\n') if url.strip()][:5]
+        
+        # Afficher le nombre d'URLs détectées
+        if competitor_urls:
+            st.info(f"📊 {len(competitor_urls)} concurrent(s) détecté(s)")
 
     # Bouton de comparaison
     if st.button("🔍 Analyser les URLs", key="analyze_urls"):
