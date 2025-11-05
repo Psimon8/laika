@@ -25,34 +25,45 @@ st.markdown("""
     .sidebar-title {
         font-size: 18px;
         font-weight: 600;
-        padding: 0 20px 24px 20px;
+        padding: 0 0 20px 20px;
+        text-align: left;
     }
     
-    /* Réduire l'espacement entre les boutons */
+    /* Réduire l'espacement entre les boutons au minimum */
     .stButton {
-        margin-bottom: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
     
     div[data-testid="stVerticalBlock"] > div {
         gap: 0 !important;
+        padding: 0 !important;
     }
     
-    /* Cacher les boutons Streamlit par défaut et adopter le style de l'image */
+    .element-container {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* Style des boutons - alignés à gauche */
     .stButton>button {
         border: none !important;
         background: transparent !important;
-        padding: 8px 20px !important;
+        padding: 6px 20px !important;
         width: 100%;
-        text-align: left;
+        text-align: left !important;
         font-size: 15px !important;
         font-weight: 400 !important;
         color: rgba(250, 250, 250, 0.75) !important;
         box-shadow: none !important;
-        border-radius: 8px !important;
+        border-radius: 6px !important;
         margin: 0 !important;
-        line-height: 1.6 !important;
+        height: auto !important;
+        min-height: 0 !important;
+        line-height: 1.4 !important;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
         transition: all 0.15s ease !important;
+        display: block !important;
     }
     
     .stButton>button:hover {
@@ -67,8 +78,8 @@ st.markdown("""
     
     /* Footer de la sidebar */
     .sidebar-footer {
-        text-align: center;
-        padding: 16px 20px;
+        text-align: left;
+        padding: 16px 0 16px 20px;
         font-size: 11px;
         opacity: 0.4;
         margin-top: 40px;
