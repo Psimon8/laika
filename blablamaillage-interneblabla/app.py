@@ -46,10 +46,8 @@ try:
 except ImportError:
     FUZZY_AVAILABLE = False
 
-st.set_page_config(
-    page_title="Blablablablablablablabla",
-    layout="wide", initial_sidebar_state="expanded"
-)
+# Configuration déjà faite dans app.py principal
+# st.set_page_config est appelé uniquement dans app.py pour éviter les conflits
 
 # --- CLASSE ANALYSEUR (Stable et complète) ---
 class InternalLinkingAnalyzer:
@@ -486,8 +484,8 @@ def main():
     # Footer
     st.divider()
     st.markdown(
-        "<div style='text-align: center; color: #666; padding: 20px;'>"
-        "Développé par <a href='https://jc-espinosa.com/' target='_blank' style='color: #0066cc; text-decoration: none;'>JC</a> et Claude :)"
+        "<div style='text-align: center; opacity: 0.6; padding: 20px;'>"
+        "Développé par <a href='https://jc-espinosa.com/' target='_blank' style='text-decoration: none;'>JC</a> et Claude :)"
         "</div>",
         unsafe_allow_html=True
     )

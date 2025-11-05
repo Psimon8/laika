@@ -7,16 +7,8 @@ import json
 import datetime
 import requests
 
-st.set_page_config(
-    page_title="🚀 Structured Data Analyser", 
-    layout="wide",
-    initial_sidebar_state="expanded",
-    menu_items={
-        'Get Help': None,
-        'Report a bug': None,
-        'About': None
-    }
-)
+# Configuration déjà faite dans app.py principal
+# st.set_page_config est appelé uniquement dans app.py pour éviter les conflits
 
 # CSS pour fixer le header et les tabs
 st.markdown("""

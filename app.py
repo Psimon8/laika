@@ -8,35 +8,24 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# CSS personnalisé simplifié
+# CSS personnalisé pour dark mode
 st.markdown("""
 <style>
-    /* Fond blanc général */
-    .stApp {
-        background-color: #ffffff;
-        color: #000000;
-    }
-    
     /* Sidebar simple */
     [data-testid="stSidebar"] {
-        background-color: #f8f9fa;
-        border-right: 1px solid #e0e0e0;
+        border-right: 1px solid rgba(250, 250, 250, 0.1);
     }
     
     /* Titre de la sidebar */
     .sidebar-title {
         font-size: 24px;
         font-weight: 700;
-        color: #000000;
         text-align: center;
         padding: 20px 0 10px 0;
     }
     
     /* Boutons du menu */
     .stButton>button {
-        background-color: #ffffff;
-        color: #000000;
-        border: 1px solid #e0e0e0;
         border-radius: 6px;
         padding: 10px 16px;
         width: 100%;
@@ -47,18 +36,13 @@ st.markdown("""
         margin-bottom: 4px;
     }
     
-    .stButton>button:hover {
-        background-color: #f0f0f0;
-        border-color: #000000;
-    }
-    
     /* Footer de la sidebar */
     .sidebar-footer {
         text-align: center;
         padding: 20px;
         font-size: 11px;
-        color: #666666;
-        border-top: 1px solid #e0e0e0;
+        opacity: 0.6;
+        border-top: 1px solid rgba(250, 250, 250, 0.1);
         margin-top: 30px;
     }
 </style>
