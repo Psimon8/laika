@@ -24,8 +24,9 @@ st.markdown("""
         padding: 20px 0 10px 0;
     }
     
-    /* Boutons du menu */
+    /* Retirer les bordures des boutons */
     .stButton>button {
+        border: none !important;
         border-radius: 6px;
         padding: 10px 16px;
         width: 100%;
@@ -57,20 +58,36 @@ with st.sidebar:
     if 'selected_page' not in st.session_state:
         st.session_state.selected_page = "Accueil"
     
-    # Menu simple sans catégories
+    # Bouton Accueil uniquement
     if st.button("🏠 Accueil", key="home", use_container_width=True):
         st.session_state.selected_page = "Accueil"
         st.rerun()
     
-    if st.button("🔍 Structured Data Analyser", key="structured_data", use_container_width=True):
+    st.markdown("---")
+    
+    # Menu déroulant pour les outils
+    tool_options = [
+        "Sélectionner un outil...",
+        "🔍 Structured Data Analyser",
+        "🔗 Maillage Interne",
+        "💬 Questions Conversationnelles"
+    ]
+    
+    selected_tool = st.selectbox(
+        "Outils SEO",
+        tool_options,
+        index=0,
+        key="tool_selector"
+    )
+    
+    # Gérer la sélection du menu déroulant
+    if selected_tool == "🔍 Structured Data Analyser":
         st.session_state.selected_page = "Structured Data Analyser"
         st.rerun()
-    
-    if st.button("🔗 Maillage Interne", key="maillage", use_container_width=True):
+    elif selected_tool == "🔗 Maillage Interne":
         st.session_state.selected_page = "Maillage Interne"
         st.rerun()
-    
-    if st.button("💬 Questions Conversationnelles", key="questions", use_container_width=True):
+    elif selected_tool == "💬 Questions Conversationnelles":
         st.session_state.selected_page = "Conversational Queries"
         st.rerun()
     
