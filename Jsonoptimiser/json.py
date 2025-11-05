@@ -18,14 +18,9 @@ st.set_page_config(
     }
 )
 
-# CSS pour fixer le header et les tabs + forcer le dark mode
+# CSS pour fixer le header et les tabs
 st.markdown("""
 <style>
-    /* Forcer le dark mode */
-    :root {
-        color-scheme: dark;
-    }
-    
     /* Fixer le header */
     .main > div:first-child {
         position: sticky;
@@ -45,11 +40,6 @@ st.markdown("""
     /* Style pour les colonnes */
     [data-testid="column"] {
         padding: 1rem;
-    }
-    
-    /* Retirer les arrière-plans forcés */
-    .stApp {
-        background-color: inherit;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -140,10 +130,7 @@ def display_comparison_results(client_schema, competitor_schemas, competitor_nam
     grouped = df.groupby("Type")
     for group_type, group_df in grouped:
         with st.expander(f"📂 {group_type}"):
-            def colorize(val):
-                return "color: green" if val == "✅" else "color: red"
-            styled_group = group_df.style.applymap(colorize, subset=group_df.columns[2:])
-            st.dataframe(styled_group, use_container_width=True)
+            st.dataframe(group_df, use_container_width=True)
 
     # ------------------------
     # 📌 RAPPORT OPPORTUNITÉS
